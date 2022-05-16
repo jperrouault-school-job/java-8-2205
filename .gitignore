@@ -1,0 +1,7 @@
+target/
+build/
+bin/
+.vscode/
+.code-workspace
+.classpath
+.project
