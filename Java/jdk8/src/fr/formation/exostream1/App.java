@@ -32,12 +32,12 @@ public class App {
         );
         
         // Exercice 3 - V2
-        System.out.println(
-            IntStream
-                .range(0, 11)
-                .filter(i -> !IntUtil.estPair(i))
-                .reduce((acc, i) -> acc += i)
-                .orElseThrow() // Message d'erreur pour Bastien
-        );
+        int result = IntStream
+            .range(0, 11)
+            .filter(i -> !IntUtil.estPair(i))
+            .reduce((acc, i) -> acc += i)
+            .orElseThrow(); // Message d'erreur pour Bastien
+        
+        System.out.println("Résultat = " + result);
     }
 }
