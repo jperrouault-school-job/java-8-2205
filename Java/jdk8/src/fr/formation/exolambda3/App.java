@@ -9,8 +9,15 @@ public class App {
 
         Supplier<Produit> ctor1 = Produit::new;
         Function<String, Produit> ctor2 = Produit::new;
+        InfiniteFunction<Produit> ctor3 = Produit::new;
 
-        useCtor(ctor2);
+        useCtor(ctor3);
+    }
+
+    public static void useCtor(InfiniteFunction<Produit> ctor) {
+        Produit produit = ctor.apply("Libellé", "prix", 53, 4310d);
+
+        System.out.println(produit);
     }
 
     public static void useCtor(Supplier<Produit> ctor) {

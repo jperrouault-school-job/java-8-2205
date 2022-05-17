@@ -8,4 +8,8 @@ public class Produit {
     public Produit(String libelle) {
         System.out.println("CREATION DU PRODUIT ... " + libelle);
     }
+
+    public Produit(Object... args) {
+        System.out.println("CREATION DU PRODUIT INFINI ..." + args);
+    }
 }
