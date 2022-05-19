@@ -13,13 +13,15 @@ public class App {
         // Création d'un connecteur WebSocket (java.net.http)
         // Dans le client Http, possibilité de créer un nouveau "Socket"
         // Créer un socket "asynchrone" : CompletableFuture<WebSocket>
+        
+        // Lors de la création du WS, il faudra un "Listener" (WebSocket.Listener)
+        // -> Classe qui implémente l'interface (onText à réimplementer)
+
         WebSocket websocket = httpClient
             .newWebSocketBuilder()
             .buildAsync(new URI("ws://localhost:3000"), new WebSocketListener())
             .join();
 
-        // Lors de la création du WS, il faudra un "Listener" (WebSocket.Listener)
-        // -> Classe qui implémente l'interface (onText à réimplementer)
-
+        Thread.sleep(5000);
     }
 }
