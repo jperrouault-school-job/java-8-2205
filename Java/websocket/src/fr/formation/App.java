@@ -3,7 +3,7 @@ package fr.formation;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.SubmissionPublisher;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -17,11 +17,20 @@ public class App {
         // Lors de la création du WS, il faudra un "Listener" (WebSocket.Listener)
         // -> Classe qui implémente l'interface (onText à réimplementer)
 
+        // (StreamReactive) Création d'un Publisher
+        SubmissionPublisher<String> publisher = new SubmissionPublisher<>();
+
+        publisher.subscribe(new WebSocketSubscriber());
+
         WebSocket websocket = httpClient
             .newWebSocketBuilder()
-            .buildAsync(new URI("ws://localhost:3000"), new WebSocketListener())
+            .buildAsync(new URI("ws://localhost:3000"), new WebSocketListener(publisher))
             .join();
 
-        Thread.sleep(5000);
+        while (publisher.hasSubscribers()) {
+            Thread.sleep(200);
+        }
+
+        System.out.println("Fin de l'application");
     }
 }
