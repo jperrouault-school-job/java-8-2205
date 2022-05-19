@@ -5,6 +5,7 @@ public class App {
         // Version switch "classique"
         int a = 1;
         String valeur = "";
+        System.out.println(System.getProperty("java.version"));
 
         switch (a) {
             case 0: valeur = "VALEUR 0"; break;
