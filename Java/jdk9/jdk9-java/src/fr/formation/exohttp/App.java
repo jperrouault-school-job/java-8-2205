@@ -1,4 +1,4 @@
-package fr.formation.demohttp;
+package fr.formation.exohttp;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -15,10 +15,12 @@ public class App {
             .build();
         
         // Client HTTP pour exploiter la requête HTTP
-        HttpResponse<String> response = HttpClient
+        HttpClient
             .newHttpClient()
-            .send(request, BodyHandlers.ofString());
-
-        System.out.println(response.body());
+            .sendAsync(request, BodyHandlers.ofString())
+            .thenApply(HttpResponse::body)
+            .thenAccept(System.out::println)
+            .join() // Permet au thread d'attendre la résolution de ce CompletableFuture
+            ;
     }
 }
